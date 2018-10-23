@@ -48,14 +48,7 @@ namespace Test {
 		// Note: Given n will be between 1 and 9 inclusive.
 		__declspec(dllexport) static string GetPermutation(int n, int k);
 
-		// Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
-		// If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).
-		// The replacement must be in-place, do not allocate extra memory.
-		// Here are some examples. Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.
-		// 1,2,3 -> 1,3,2
-		// 3,2,1 -> 1,2,3
-		// 1,1,5 -> 1,5,1
-		template<class T> static void NextPermutation(vector<T> & input);
+		
 	};
 
 	template<class T> void Permutation::Swap(T * buffer, unsigned int position1, unsigned int position2)
@@ -162,35 +155,6 @@ namespace Test {
 		return output;
 	}
 
-	template<class T> void Permutation::NextPermutation(vector<T> & input)
-	{
-		if (input.size() <= 1) return;
-
-		// Find highest i such that input[i..] decreases and input[i-1] < input[i]
-		int i = input.size() - 1;
-		while (i - 1 >= 0 && input[i - 1] >= input[i]) i--;
-
-		// Reverse input[i..] such that it increases
-		int j = i;
-		int k = input.size() - 1;
-		T t;
-		while (j < k) {
-			t = input[j];
-			input[j] = input[k];
-			input[k] = t;
-			j++;
-			k--;
-		}
-
-		// Find first element from input[i..] that is greater than input[i-1],
-		// and then swap these two elements.
-		if (i != 0) {
-			j = i - 1;
-			while (input[j] >= input[i]) i++;
-			t = input[j];
-			input[j] = input[i];
-			input[i] = t;
-		}
-	}
+	
 }
 
