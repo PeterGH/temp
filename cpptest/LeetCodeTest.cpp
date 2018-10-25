@@ -3,86 +3,7 @@
 void LeetCodeTest::Init(void)
 {
     
-    Add("26. Remove Duplicates", [&]() {
-        auto check = [&](vector<int> & v)
-        {
-            Logger() << v;
-            set<int> s;
-            for (size_t i = 0; i < v.size(); i++)
-            {
-                s.insert(v[i]);
-            }
-            size_t len = LeetCode::Array::removeDuplicates(v);
-            Logger() << v;
-            ASSERT1(len == s.size());
-            for (size_t i = 0; i < len; i++)
-            {
-                ASSERT1(v[i] == *s.begin());
-                s.erase(s.begin());
-            }
-        };
-        {
-            vector<int> v = { 0, 1, 2, 3, 4, 5 };
-            check(v);
-        }
-        {
-            vector<int> v = { 0, 0, 0 };
-            check(v);
-        }
-        {
-            for (int i = 0; i < 20; i++) {
-                vector<int> input = Util::RandomVector(Util::RandomInt(50, 1), 10, -10);
-                sort(input.begin(), input.end());
-                int length = (int)input.size();
-                Logger().WriteInformation("Run %d: %d elements\n", i, length);
-                check(input);
-            }
-        }
-    });
-
-    Add("27. Remove Element", [&]() {
-        auto check = [&](vector<int> & v, int e)
-        {
-            Logger() << v << "Removing " << e << endl;
-            vector<int> s;
-            for (size_t i = 0; i < v.size(); i++)
-            {
-                if (v[i] != e) s.push_back(v[i]);
-            }
-            vector<int> v2 = Util::Duplicate(v); 
-            
-            size_t len = LeetCode::Array::removeElementStable(v, e);
-            Logger() << v << "Length " << len << endl;
-            size_t len2 = LeetCode::Array::removeElementUnstable(v2, e);
-            Logger() << v2 << "Length " << len2 << endl;
-            ASSERT1(len == s.size());
-            ASSERT1(len2 == s.size());
-
-            sort(v.begin(), v.begin() + len);
-            sort(v2.begin(), v2.begin() + len2);
-            sort(s.begin(), s.end());
-            for (size_t i = 0; i < len; i++)
-            {
-                ASSERT1(v[i] == s[i]);
-                ASSERT1(v2[i] == s[i]);
-            }
-        };
-        {
-            vector<int> v = { 0, 1, 2, 3, 4, 5 };
-            check(v, 0);
-        }
-        {
-            vector<int> v = { 0, 0, 0 };
-            check(v, 0);
-        }
-        for (int i = 0; i < 20; i++) {
-            vector<int> input = Util::RandomVector(Util::RandomInt(50, 1), 10, -10);
-            int length = (int)input.size();
-            Logger().WriteInformation("Run %d: %d elements\n", i, length);
-            check(input, Util::RandomInt(10, -10));
-        }
-    });
-
+    
 
     
     Add("34. Search Range", [&]() {
@@ -121,45 +42,7 @@ void LeetCodeTest::Init(void)
         }
     });
 
-    Add("39. Combination Sum", [&]() {
-        auto check = [&](vector<int>& v, int t) {
-            Logger() << v << "Target " << t << endl;
-            auto v1 = Util::Duplicate(v);
-            auto v2 = Util::Duplicate(v);
-            auto v3 = Util::Duplicate(v);
-            auto c1 = LeetCode::Combination::combinationSumReuse(v1, t);
-            auto c2 = LeetCode::Combination::combinationSumReuse2(v2, t);
-            auto c3 = LeetCode::Combination::combinationSumReuse3(v3, t);
-            Util::SortGrid(c1);
-            Util::SortGrid(c2);
-            Util::SortGrid(c3);
-            Logger() << c1;
-            ASSERT1(c1.size() == c2.size());
-            ASSERT1(c1.size() == c3.size());
-            for (size_t i = 0; i < c1.size(); i++)
-            {
-                ASSERT1(c1[i].size() == c2[i].size());
-                ASSERT1(c1[i].size() == c3[i].size());
-                for (size_t j = 0; j < c1[i].size(); j++)
-                {
-                    ASSERT1(c1[i][j] == c2[i][j]);
-                    ASSERT1(c1[i][j] == c3[i][j]);
-                }
-            }
-        };
-        for (int i = 0; i < 20; i++) {
-            vector<int> input = Util::IncreasingVector(Util::RandomInt(10, 1), 2);
-            Util::Shuffle(input);
-            int t = 0;
-            int c = 1 + (input.size() >> 2);
-            for (int j = 0; j < c; j++)
-            {
-                t += input[Util::RandomInt(input.size() - 1)];
-            }
-            check(input, t);
-        }
-    });
-
+    
     Add("49. Group Anagrams", [&]() {
         vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
         vector<vector<string>> result = LeetCode::String::groupAnagrams(strs);
