@@ -25,17 +25,7 @@ void LeetCodeTest::Init(void)
 
     
     
-    Add("63. Unique Paths II", [&]() {
-        auto test = [&](vector<vector<int>> & grid, int expected) {
-            int count = LeetCode::Grid::uniquePathsWithObstacles(grid);
-            Logger() << "Unique paths: " << count << "\n";
-            ASSERT1(count == expected);
-        };
-
-        vector<vector<int>> grid = { { 0, 0}, { 0, 0} };
-        test(grid, 2);
-    });
-
+    
     Add("69. Sqrt(x)", [&]() {
         auto test = [&](int x, int expected) {
             int actual = LeetCode::Numeric::mySqrt(x);
